@@ -12,7 +12,82 @@
 			</div>
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav topNav">
-					{if $config.settings.news}<li id="navNews"><a href="{linkto page="news.php"}">{$lang.news}</a></li>{/if}
+
+					<li id="navHome"><a href="{linkto page="index.php"}">Home</a></li>
+					<li id="navGalleries"><a href="{linkto page="gallery.php?mode=gallery"}">{$lang.galleries}</a></li>
+					<li id="navAbout"><a href="{linkto page="about.php"}">About</a></li>
+					<li id="navWorkshop"><a href="{linkto page="#"}">Workshop</a></li>
+					<li id="navWorkshop"><a href="{linkto page="#"}">Product</a></li>
+					{if $config.settings.news}<li id="navNews"><a href="http://www.willieholdman.com/blog/">{$lang.news}</a></li>{/if}
+
+
+					{* Login Status & Name *}
+					{if $config.settings.display_login}
+						{if $loggedIn}
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">{$member.f_name} {$member.l_name}<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="{linkto page="members.php"}">{$lang.myAccount}</a></li>
+									{if $lightboxSystem}<li><a href="{linkto page="lightboxes.php"}">{$lang.lightboxes}</a></li>{/if}
+									<li id="navWorkshop"><a href="{linkto page="#"}">Contact</a></li>
+									<li><a href="{linkto page="login.php?cmd=logout"}">{$lang.logout}</a></li>
+								</ul>
+							</li>
+						{else}
+							{if $lightboxSystem}<li><a href="{linkto page="lightboxes.php"}">{$lang.lightboxes}</a></li>{/if}
+							<li id="navWorkshop"><a href="{linkto page="#"}">Contact</a></li>
+							<li><a href="{linkto page="login.php?jumpTo=members"}">{$lang.login}</a></li>
+							<!--<li><a href="{linkto page="create.account.php?jumpTo=members"}">{$lang.createAccount}</a></li>-->
+						{/if}
+					{/if}
+
+					{if $cartStatus}			
+						<div class="nav navbar-right">
+							<div id="headerCartBox">
+								<div id="cartPreviewContainer">
+									<div id="miniCartContainer"></div>
+									<div style="float: left; position: relative;" class="viewCartLink"><p id="cartItemsCount">{$cartTotals.itemsInCart}</p><a href="{linkto page="cart.php"}"><img src="{$imgPath}/cart.icon.png" alt="{$lang.cart}"></a></div>
+									<div style="float: left; display:{if $cartTotals.priceSubTotal or $cartTotals.creditsSubTotalPreview}block{else}none{/if};" id="cartPreview">
+										<a href="{linkto page="cart.php"}" class="viewCartLink">
+										<span id="cartPreviewPrice" style="{if !$currencySystem}display: none;{/if}">{$cartTotals.priceSubTotalPreview.display}</span><!-- with tax {$cartTotals.totalLocal.display}-->
+										{if $creditSystem and $currencySystem} + {/if}
+										<span id="cartPreviewCredits" style="{if !$creditSystem}display: none;{/if}">{$cartTotals.creditsSubTotalPreview} </span> {if $creditSystem}{$lang.credits}{/if}
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					{/if}
+
+					{if $smarty.server.REQUEST_URI == '/gallery.php?mode=gallery'}
+					<div class="nav navbar-right col-md-2">
+						<form role="search" action="{linkto page="search.php"}" method="get" id="searchFormTest" class="navbar-form">			
+						<input type="hidden" name="clearSearch" value="true">
+							<div class="input-group">					
+								<input type="text" class="form-control" placeholder="{$lang.enterKeywords}" name="searchPhrase" id="searchPhrase">
+								<div class="input-group-btn">
+									<button class="btn btn-info">
+										<span class="glyphicon glyphicon-search"></span>
+									</button>
+								</div>					
+							</div>
+							<div style="margin-top: 6px;">
+								{if $currentGallery.gallery_id}<input type="checkbox" name="galleries" id="searchCurrentGallery" value="{$currentGallery.gallery_id}" checked="checked"><label for="searchCurrentGallery">{$lang.curGalleryOnly}</label>&nbsp;&nbsp;{/if}
+								<!--<a href="{linkto page='search.php'}">{$lang.advancedSearch}</a>-->
+								{* Event Search Link *}
+								{if $config.settings.esearch}
+									<a href="{linkto page="esearch.php"}">{$lang.eventSearch}</a>
+								{/if}
+							</div>
+						</form>		
+					</div>
+
+					
+					{/if}
+
+
+
+					
 					{if $featuredTab}
 						<li id="featuredNavButton" class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">{$lang.featuredItems}<b class="caret"></b></a>
@@ -27,30 +102,14 @@
 								{if $config.settings.subpage and $config.settings.subscriptions}<li id="featuredSubnavSubscriptions"><a href="{linkto page="featured.php?mode=subscriptions"}">{$lang.subscriptions}</a></li>{/if}
 								{if $config.settings.creditpage}<li id="featuredSubnavCredits"><a href="{linkto page="featured.php?mode=credits"}">{$lang.credits}</a></li>{/if}
 							</ul>
-						</li>							
+						</li>				
 					{/if}
-					<li id="navGalleries"><a href="{linkto page="gallery.php?mode=gallery"}">{$lang.galleries}</a></li>
+					
 					{if $config.settings.newestpage}<li id="navNewestMedia"><a href="{linkto page="gallery.php?mode=newest-media&page=1"}">{$lang.newestMedia}</a></li>{/if}
 					{if $config.settings.popularpage}<li id="navPopularMedia"><a href="{linkto page="gallery.php?mode=popular-media&page=1"}">{$lang.popularMedia}</a></li>{/if}
 					{if addon('contr') && {$contribLink} == 1}<li id="navContributors"><a href="{linkto page="contributors.php"}">{$lang.contributors}</a></li>{/if}
 					{if $config.settings.promopage}<li id="navPromotions"><a href="{linkto page="promotions.php"}">{$lang.promotions}</a></li>{/if}
-					{* Login Status & Name *}
-					{if $config.settings.display_login}
-						{if $loggedIn}
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">{$member.f_name} {$member.l_name}<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-									<li><a href="{linkto page="members.php"}">{$lang.myAccount}</a></li>
-									{if $lightboxSystem}<li><a href="{linkto page="lightboxes.php"}">{$lang.lightboxes}</a></li>{/if}
-									<li><a href="{linkto page="login.php?cmd=logout"}">{$lang.logout}</a></li>
-								</ul>
-							</li>
-						{else}
-							{if $lightboxSystem}<li><a href="{linkto page="lightboxes.php"}">{$lang.lightboxes}</a></li>{/if}
-							<li><a href="{linkto page="login.php?jumpTo=members"}">{$lang.login}</a></li>
-							<!--<li><a href="{linkto page="create.account.php?jumpTo=members"}">{$lang.createAccount}</a></li>-->
-						{/if}
-					{/if}
+					
 				</li>
 					
 				</ul>
