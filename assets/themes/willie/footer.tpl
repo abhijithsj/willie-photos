@@ -4,9 +4,7 @@
 	{/if}
 	<div class="container">
 		<div class="row">
-			<div class="col-md-3">
-				{$lang.copyright} <a href="{$baseURL}">{$config.settings.business_name}</a><br>{$lang.reserved}
-			</div>
+			<!--
 			<div class="col-md-3">
 				{if addon('rss')}
 				<ul>
@@ -17,23 +15,32 @@
 				</ul>
 				{/if}
 			</div>
-			<div class="col-md-3">
+							
 				<ul style="margin-bottom: 10px;">
-					{if $config.settings.contact}<li><a href="{linkto page="contact.php"}">{$lang.contactUs}</a></li>{/if}
+					
 					{if $config.settings.aboutpage}<li><a href="{linkto page="about.php"}">{$lang.aboutUs}</a></li>{/if}
 					{if $config.settings.forum_link}<li><a href="{$config.settings.forum_link}">{$lang.forum}</a></li>{/if}					
-					{if $config.settings.tospage}<li><a href="{linkto page='terms.of.use.php'}">{$lang.termsOfUse}</a></li>{/if}
-					{if $config.settings.pppage}<li><a href="{linkto page='privacy.policy.php'}">{$lang.privacyPolicy}</a></li>{/if}
+					
 					{if $config.settings.papage}<li><a href="{linkto page='purchase.agreement.php'}">{$lang.purchaseAgreement}</a></li>{/if}
 				</ul>
+			-->
+			<div class="col-md-2"></div>
+			<div class="col-md-10">
+				
 				{if $config.settings.facebook_link}<a href="{$config.settings.facebook_link}" target="_blank"><img src="{$imgPath}/facebook.icon.png" width="20" title="Facebook"></a>{/if}&nbsp;{if $config.settings.twitter_link}<a href="{$config.settings.twitter_link}" target="_blank"><img src="{$imgPath}/twitter.icon.png" width="20" title="Twitter"></a>{/if}
+				<a href="http://www.willieholdman.com/">| WILLIEHOLDMAN.COM |</a>
+				{if $config.settings.contact}<a href="{linkto page="contact.php"}"> CONTACT INFO |</a>{/if}
+				<a href="#"> ALL RIGHTS RESERVED &copy; |</a>
+			<!--
+				{$lang.copyright} <a href="{$baseURL}">{$config.settings.business_name}</a><br>{$lang.reserved}
+			-->
+				{if $config.settings.tospage}<a href="{linkto page='terms.of.use.php'}"> {$lang.termsOfUse} |</a>{/if}
+				{if $config.settings.pppage}<a href="{linkto page='privacy.policy.php'}"> {$lang.privacyPolicy} |</a>|{/if}
+				<a href="#"> SITE MAP </a>
 			</div>
-			<div class="col-md-3 text-right">
-				{if !addon('unbrand')}
-					<!-- Powered By PhotoStore | Sell Your Photos Online -->
-					<p id="poweredBy">Powered By <a href="http://www.ktools.net/photostore/" target="_blank" class="photostoreLink" title="Powered By PhotoStore | Sell Your Photos Online">PhotoStore</a><br><a href="http://www.ktools.net/photostore/" target="_blank" class="sellPhotos">Sell Photos Online</a></p>
-				{/if}
-			</div>
+			<div class="col-md-2"></div>
+
+
 		</div>
 	</div>
 	<div id="statsCode">{$config.settings.stats_html}</div>
