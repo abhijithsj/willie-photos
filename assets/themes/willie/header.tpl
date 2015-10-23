@@ -35,7 +35,7 @@
 							</li>
 						{else}
 							{if $lightboxSystem}<li><a href="{linkto page="lightboxes.php"}">{$lang.lightboxes}</a></li>{/if}
-							<li id="navWorkshop"><a href="{linkto page="#"}">Contact</a></li>
+							<li id="navWorkshop"><a href="{linkto page="contact.php"}">Contact</a></li>
 							<li><a href="{linkto page="login.php?jumpTo=members"}">{$lang.login}</a></li>
 							<!--<li><a href="{linkto page="create.account.php?jumpTo=members"}">{$lang.createAccount}</a></li>-->
 						{/if}
@@ -60,7 +60,7 @@
 					{/if}
 
 					{if $smarty.server.REQUEST_URI == '/gallery.php?mode=gallery'}
-					<div class="nav navbar-right col-md-2">
+					<div class="nav navbar-right col-md-3">
 						<form role="search" action="{linkto page="search.php"}" method="get" id="searchFormTest" class="navbar-form">			
 						<input type="hidden" name="clearSearch" value="true">
 							<div class="input-group">					

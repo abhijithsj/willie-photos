@@ -3,7 +3,7 @@
 		<div class="container messageBar alert alert-danger">{$lang.{$messageLang}} <p><a href="#" class="buttonLink btn btn-xs btn-danger">X</a></p></div>
 	{/foreach}
 {/if}
-<div class="container infoBar well" style="border: 1px solid #FFF;">	
+<div class="container infoBar well" style="border: 1px solid #FFF; display:none;">	
 	{* Header Search Box Area *}
 		
 	<div class="row">		
